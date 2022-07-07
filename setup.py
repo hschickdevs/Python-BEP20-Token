@@ -2,9 +2,11 @@ from setuptools import setup, find_packages
 
 import bep20
 
+
 def readme():
     with open('README.md') as infile:
         return infile.read()
+
 
 setup(
     name='bep20',
