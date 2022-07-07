@@ -2,6 +2,9 @@ from setuptools import setup, find_packages
 
 import bep20
 
+def readme():
+    with open('README.md') as infile:
+        return infile.read()
 
 setup(
     name='bep20',
@@ -9,6 +12,7 @@ setup(
     author='Harrison Schick',
     author_email='hschickdevs@gmail.com',
     description='Python package that models the methods for tokens following the BEP-20 token standard on the Binance Smart chain.',
+    long_description=readme(),
     url='https://github.com/hschickdevs/Python-BEP20-Token',
     # license='MIT',
     packages=['bep20'],

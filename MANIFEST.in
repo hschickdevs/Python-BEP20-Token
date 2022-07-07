@@ -1,1 +1,2 @@
 recursive-include bep20/abi *
+include requirements.txt
