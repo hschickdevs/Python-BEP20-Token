@@ -7,8 +7,9 @@
 > NOTE: This package is in development and currently only offers basic functionality...
 ___
 # Installation:
+
 ```bash
-pip install 
+pip install bep20
 ```
 
 
