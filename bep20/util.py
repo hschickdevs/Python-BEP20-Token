@@ -22,10 +22,10 @@ def get_contract_instance(network_rpc_url: str, abi_filename: str, contract_addr
 def store_abi(abi_url: str, abi_filename: str) -> None:
     """
     Format and store a smart contract ABI in JSON locally
+
     :param abi_url: NETWORK SCAN -> Export ABI -> RAW/Text Format -> Get the URL
                     (ex. "http://api.etherscan.io/api?module=contract&action=getabi&address=0xc4a59cfed3fe06bdb5c21de75a70b20db280d8fe&format=raw")
     :param abi_filename: The desired filename for local storage
-    :param abi_path: The local path for the abi if one already exists and is being refactored
     """
     contract_abi = requests.get(abi_url).json()
     path = join(join(dirname(__file__)), "abi", abi_filename)
