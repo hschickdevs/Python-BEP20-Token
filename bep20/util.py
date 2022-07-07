@@ -4,6 +4,9 @@ from os import getcwd
 
 from web3 import Web3
 import web3
+import requests
+
+ABI_DIR = join(dirname(__file__), "abi")
 
 
 def get_web3_provider(network_rpc_url: str) -> Web3:
@@ -11,8 +14,9 @@ def get_web3_provider(network_rpc_url: str) -> Web3:
 
 
 def get_contract_instance(network_rpc_url: str, abi_filename: str, contract_address: str):
-    with open(join(dirname(__file__), abi_filename), 'r') as abi_file:
-        return self.get_web3_provider(network_rpc_url).eth.contract(abi=json.load(abi_file), address=Web3.toChecksumAddress(contract_address))
+    with open(join(ABI_DIR, abi_filename), 'r') as abi_file:
+        return get_web3_provider(network_rpc_url).eth.contract(abi=json.load(abi_file),
+                                                               address=Web3.toChecksumAddress(contract_address))
     
     
 def store_abi(abi_url: str, abi_filename: str) -> None:
