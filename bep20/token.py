@@ -3,11 +3,11 @@ from .util import get_contract_instance, checksum
 
 class BEP20Token:
     """https://github.com/bnb-chain/BEPs/blob/master/BEP20.md"""
-
     def __init__(self, token_address: str, network_rpc_url: str = "https://bsc-dataseed.binance.org/"):
         self.contract = get_contract_instance(network_rpc_url,
                                               abi_filename="BEP20.json",
                                               contract_address=token_address)
+        self.address = token_address
 
     def name(self) -> str:
         """Returns the name of the token - e.g. 'MyToken'."""
