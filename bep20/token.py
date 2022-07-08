@@ -1,12 +1,14 @@
 from .util import get_contract_instance, checksum
 
+from web3 import Web3
+
 
 class BEP20Token:
     """https://github.com/bnb-chain/BEPs/blob/master/BEP20.md"""
-    def __init__(self, token_address: str, network_rpc_url: str = "https://bsc-dataseed.binance.org/"):
-        self.contract = get_contract_instance(network_rpc_url,
-                                              abi_filename="BEP20.json",
-                                              contract_address=token_address)
+    def __init__(self, token_address: str, w3_provider: Web3 = None):
+        self.contract = get_contract_instance(abi_filename="BEP20.json",
+                                              contract_address=token_address,
+                                              w3_provider=w3_provider)
         self.address = token_address
 
     def name(self) -> str:

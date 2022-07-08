@@ -13,7 +13,10 @@ def get_web3_provider(network_rpc_url: str) -> Web3:
     return Web3(Web3.HTTPProvider(network_rpc_url))
 
 
-def get_contract_instance(network_rpc_url: str, abi_filename: str, contract_address: str):
+def get_contract_instance(abi_filename: str, contract_address: str, w3_provider: Web3 = None):
+    if w3_provider is None:
+        w3_provider = get_web3_provider("https://bsc-dataseed.binance.org/")
+        
     with open(join(ABI_DIR, abi_filename), 'r') as abi_file:
         return get_web3_provider(network_rpc_url).eth.contract(abi=json.load(abi_file),
                                                                address=Web3.toChecksumAddress(contract_address))
