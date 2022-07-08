@@ -18,8 +18,8 @@ def get_contract_instance(abi_filename: str, contract_address: str, w3_provider:
         w3_provider = get_web3_provider("https://bsc-dataseed.binance.org/")
         
     with open(join(ABI_DIR, abi_filename), 'r') as abi_file:
-        return get_web3_provider(network_rpc_url).eth.contract(abi=json.load(abi_file),
-                                                               address=Web3.toChecksumAddress(contract_address))
+        return w3_provider.eth.contract(abi=json.load(abi_file),
+                                        address=Web3.toChecksumAddress(contract_address))
     
     
 def store_abi(abi_url: str, abi_filename: str) -> None:
