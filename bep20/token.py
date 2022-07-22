@@ -53,7 +53,7 @@ class BEP20Token:
         """Returns the amount which _spender is still allowed to withdraw from _owner"""
         return self.contract.functions.allowance(_owner, _spender).call()
     
-    def prepare_approve(self, _spender: str, _value: str) -> web3.contract.ContractFunction:
+    def prepare_approve(self, _spender: str, _value: int = None) -> web3.contract.ContractFunction:
         """
         UNCALLED - Prepares an approve transaction. Should be signed by the owner using web3.
         https://web3py.readthedocs.io/en/stable/web3.eth.html#web3.eth.Eth.sign_transaction
@@ -61,6 +61,6 @@ class BEP20Token:
         Allows _spender to withdraw from your account multiple times, up to the _value amount.
         If this function is called again it overwrites the current allowance with _value.
         """
-        if token_amount is None:  # if token_amount is not specified, approve the max amount
-            token_amount = 2 ** 256 - 1
-        return self.contract.functions.approve(checksum(spender_address), token_amount)
+        if _value is None:  # if _value is not specified, approve the max amount
+            _value = 2 ** 256 - 1
+        return self.contract.functions.approve(checksum(_spender), _value)
