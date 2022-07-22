@@ -24,6 +24,7 @@ pip install bep20
   - [x] getOwner()
   - [ ] transfer()
   - [ ] transferFrom()
-  - [ ] approve()
+  - [x] prepare_approve()
+    * Returns an uncalled approve() function ready to be signed by the owner.
   - [x] allowance()
 

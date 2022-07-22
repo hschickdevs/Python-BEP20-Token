@@ -1,6 +1,7 @@
 from .util import get_contract_instance, checksum
 
 from web3 import Web3
+import web3.contract
 
 
 class BEP20Token:
@@ -48,13 +49,18 @@ class BEP20Token:
         """Transfers _value amount of tokens from address _from to address _to"""
         raise NotImplementedError
 
-    def approve(self, _spender: str, _value: str):
-        """
-        Allows _spender to withdraw from your account multiple times, up to the _value amount.
-        If this function is called again it overwrites the current allowance with _value.
-        """
-        raise NotImplementedError
-
     def allowance(self, _owner: str, _spender: str) -> int:
         """Returns the amount which _spender is still allowed to withdraw from _owner"""
         return self.contract.functions.allowance(_owner, _spender).call()
+    
+    def prepare_approve(self, _spender: str, _value: str) -> web3.contract.ContractFunction:
+        """
+        UNCALLED - Prepares an approve transaction. Should be signed by the owner using web3.
+        https://web3py.readthedocs.io/en/stable/web3.eth.html#web3.eth.Eth.sign_transaction
+        
+        Allows _spender to withdraw from your account multiple times, up to the _value amount.
+        If this function is called again it overwrites the current allowance with _value.
+        """
+        if token_amount is None:  # if token_amount is not specified, approve the max amount
+            token_amount = 2 ** 256 - 1
+        return self.contract.functions.approve(checksum(spender_address), token_amount)
