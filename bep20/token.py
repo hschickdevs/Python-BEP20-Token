@@ -51,7 +51,7 @@ class BEP20Token:
 
     def allowance(self, _owner: str, _spender: str) -> int:
         """Returns the amount which _spender is still allowed to withdraw from _owner"""
-        return self.contract.functions.allowance(_owner, _spender).call()
+        return self.contract.functions.allowance(checksum(_owner), checksum(_spender)).call()
     
     def prepare_approve(self, _spender: str, _value: int = None) -> web3.contract.ContractFunction:
         """
